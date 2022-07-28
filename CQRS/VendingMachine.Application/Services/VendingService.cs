@@ -7,7 +7,7 @@ using VendingMachine.Application.Interface;
 
 namespace VendingMachine.Application.Services
 {
-    public class VendingService : IVendingService
+    public class VendingService : ITransactionService
     {
 
 

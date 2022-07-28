@@ -4,8 +4,9 @@ using VendingMachine.Application.ViewModels;
 
 namespace VendingMachine.Application.Interface
 {
-    public interface IVendingService : IDisposable
+    public interface ITransactionService : IDisposable
     {
         Task<ValidationResult> RegisterCashIn(CashInViewModel cashIn);
+        Task<ValidationResult> Refund();
     }
 }

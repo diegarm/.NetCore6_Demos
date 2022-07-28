@@ -20,7 +20,7 @@ namespace VendingMachine.CrossCutting.IoC
         }
         public static void RegisterApplication(IServiceCollection services)
         {
-            services.AddScoped<IVendingService, VendingService>();
+            services.AddScoped<ITransactionService, VendingService>();
         }
         
         public static void RegisterEvents(IServiceCollection services)
