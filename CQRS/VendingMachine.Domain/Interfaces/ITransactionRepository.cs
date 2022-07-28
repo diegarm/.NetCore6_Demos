@@ -8,7 +8,7 @@ using VendingMachine.Domain.Model;
 
 namespace VendingMachine.Domain.Interface
 {
-    public interface IWalletTransactionRepository : IRepository<WalletTransaction>
+    public interface ITransactionRepository : IRepository<Transaction>
     {
     }
 }

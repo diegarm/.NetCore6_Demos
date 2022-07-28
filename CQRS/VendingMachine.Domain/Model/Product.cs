@@ -7,8 +7,9 @@ namespace VendingMachine.Domain.Model
     {
         public string Description { get; set; }
         public decimal Price { get; set; }
+        
+        public int Quantity { get; set; }
         public bool isActive { get; set; }
 
-        public virtual ICollection<Stock> Stock { get; set; }
     }
 }

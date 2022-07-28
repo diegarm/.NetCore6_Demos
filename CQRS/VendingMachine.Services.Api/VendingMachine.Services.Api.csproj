@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VendingMachine.Application\VendingMachine.Application.csproj" />
     <ProjectReference Include="..\VendingMachine.CrossCutting.IoC\VendingMachine.CrossCutting.IoC.csproj" />
+    <ProjectReference Include="..\VendingMachine.Infra.Data\VendingMachine.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

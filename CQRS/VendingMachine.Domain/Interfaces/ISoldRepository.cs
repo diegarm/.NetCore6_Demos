@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using VendingMachine.Domain.Common.Interfaces;
 using VendingMachine.Domain.Model;
 
-namespace VendingMachine.Domain.Interface
+namespace VendingMachine.Domain.Interfaces
 {
-    public interface IStockRepository : IRepository<Stock>
+    public interface ISoldRepository : IRepository<Sold>
     {
     }
 }

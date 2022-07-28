@@ -8,11 +8,11 @@ using VendingMachine.Domain.Common.Interfaces;
 
 namespace VendingMachine.Domain.Model
 {
-    public class WalletTransaction : Entity, IAggregateRoot
+    public class Transaction : Entity, IAggregateRoot
     {
-
-        public string Description { get; set; }
-        public bool IsFinish { get; set; }
-        public virtual ICollection<Wallet> Wallet { get; set; }
+        public Guid IdTransaction { get; set; }
+        public Coin Coin { get; set; }
+        public int Quantity { get; set; }
+        public string Description { get; set; }              
     }
 }

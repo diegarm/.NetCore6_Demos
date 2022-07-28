@@ -10,9 +10,9 @@ using VendingMachine.Infra.Data.Context;
 
 namespace VendingMachine.Infra.Data.Repository
 {
-    public class WalletTransactionRepository : UnitOfWork<WalletTransaction>, IWalletTransactionRepository
+    public class TransactionRepository : UnitOfWork<Transaction>, ITransactionRepository
     {
-        public WalletTransactionRepository(VendingMachineContext context) : base(context)
+        public TransactionRepository(VendingMachineContext context) : base(context)
         {
         }
     }
