@@ -1,8 +1,9 @@
 ﻿using FluentValidation.Results;
 using MediatR;
-using VendingMachine.CrossCutting.Bus.Interfaces;
 using VendingMachine.Domain.Abstract;
 using VendingMachine.Domain.Common;
+using VendingMachine.Domain.Common.Interfaces;
+using VendingMachine.Domain.Interfaces;
 
 namespace VendingMachine.CrossCutting.Bus
 {

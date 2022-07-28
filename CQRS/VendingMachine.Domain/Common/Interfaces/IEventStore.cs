@@ -1,6 +1,6 @@
 ﻿using VendingMachine.Domain.Abstract;
 
-namespace VendingMachine.Domain.Common
+namespace VendingMachine.Domain.Common.Interfaces
 {
     public interface IEventStore
     {

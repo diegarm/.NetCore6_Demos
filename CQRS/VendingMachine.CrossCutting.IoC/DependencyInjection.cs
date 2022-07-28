@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using VendingMachine.CrossCutting.Bus;
-using VendingMachine.CrossCutting.Bus.Interfaces;
+using VendingMachine.Domain.Interfaces;
 
 namespace VendingMachine.CrossCutting.IoC
 {

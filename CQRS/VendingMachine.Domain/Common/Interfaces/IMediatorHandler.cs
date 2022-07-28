@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using VendingMachine.Domain.Abstract;
 using VendingMachine.Domain.Common;
 
-namespace VendingMachine.CrossCutting.Bus.Interfaces
+namespace VendingMachine.Domain.Interfaces
 {
     public interface IMediatorHandler
     {
