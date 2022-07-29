@@ -12,7 +12,6 @@ namespace VendingMachine.Domain.Model
     {
         public Guid IdTransaction { get; set; }
         public TypeCoin Coin { get; set; }
-        public int Quantity { get; set; }
-        public string Description { get; set; }              
+        public int Quantity { get; set; } = 1;       
     }
 }

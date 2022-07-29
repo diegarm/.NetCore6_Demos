@@ -9,11 +9,11 @@ namespace VendingMachine.Domain.Common.Interfaces
 {
     public interface IRepository<T>
     {
-        Task Save(T entity);
-        Task Delete(T entity);
-        Task Update(T entity);
-        Task<T> Get(object id);
-        Task<IEnumerable<T>> GetAll();
+        Task SaveAsync(T entity);
+        Task DeleteAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task<T> GetAsync(object id);
+        Task<IEnumerable<T>> GetAllAsync();
         Task<IEnumerable<T>> GetAllByCriteria(Expression<Func<T, bool>> expression);
 
         Task<T> GetOneByCriteria(Expression<Func<T, bool>> expression);

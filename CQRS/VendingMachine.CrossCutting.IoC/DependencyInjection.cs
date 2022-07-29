@@ -1,7 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation.Results;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using VendingMachine.Application.Interface;
 using VendingMachine.Application.Services;
 using VendingMachine.CrossCutting.Bus;
+using VendingMachine.Domain.Commands;
 using VendingMachine.Domain.Common.Interfaces;
 using VendingMachine.Domain.Interfaces;
 using VendingMachine.Infra.Data.Context;
@@ -24,6 +27,8 @@ namespace VendingMachine.CrossCutting.IoC
         
         public static void RegisterEvents(IServiceCollection services)
         {
+            services.AddScoped<IRequestHandler<RegisterCashInCommand, ValidationResult>, TransactionCommandHandler>();
+
         }
 
         public static void RegisterData(IServiceCollection services)

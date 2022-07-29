@@ -1,25 +1,37 @@
+using MediatR;
+using VendingMachine.Services.Api.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+//Database
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
+
+
+// AutoMapper
+builder.Services.AddAutoMapperConfiguration();
+
+// Swagger Config
+builder.Services.AddSwaggerConfiguration();
+
+// Adding MediatR
+builder.Services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+
+//DI
+builder.Services.AddDependencyInjectionConfiguration();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+//Swagger
+app.UseSwaggerSetup();
 
 app.Run();

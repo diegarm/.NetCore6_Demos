@@ -14,9 +14,14 @@ namespace VendingMachine.Infra.Data.Context
     {
         public VendingMachineContext(DbContextOptions<VendingMachineContext> options) : base(options) { }
 
+        public DbSet<Wallet> Wallet { get; set; }
+        public DbSet<Sold> Sold { get; set; }
+        public DbSet<Product> Product { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+
             //Product
             modelBuilder.Entity<Product>()
                         .HasData(

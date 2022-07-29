@@ -10,5 +10,6 @@ namespace VendingMachine.Domain.Interfaces
 {
     public interface ITransactionRepository : IRepository<Transaction>
     {
+        Task<bool> SaveTransaction(Transaction entity);
     }
 }

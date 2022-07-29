@@ -31,30 +31,30 @@ namespace VendingMachine.Infra.Data.Repository
             return await this.Context.Database.BeginTransactionAsync(isolation);
         }
 
-        public async Task Delete(T entity)
+        public async Task DeleteAsync(T entity)
         {
             this.Query.Remove(entity);
             await this.Context.SaveChangesAsync();
         }
 
-        public async Task Save(T entity)
+        public async Task SaveAsync(T entity)
         {
             await this.Query.AddAsync(entity);
             await this.Context.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task UpdateAsync(T entity)
         {
             this.Query.Update(entity);
             await this.Context.SaveChangesAsync();
         }
 
-        public async Task<T> Get(object id)
+        public async Task<T> GetAsync(object id)
         {
             return await this.Query.FindAsync(id);
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await this.Query.ToListAsync();
         }
