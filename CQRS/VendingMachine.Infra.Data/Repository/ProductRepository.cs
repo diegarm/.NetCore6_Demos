@@ -1,5 +1,5 @@
 ﻿using VendingMachine.Domain.Common.Interfaces;
-using VendingMachine.Domain.Interface;
+using VendingMachine.Domain.Interfaces;
 using VendingMachine.Domain.Model;
 using VendingMachine.Infra.Data.Context;
 

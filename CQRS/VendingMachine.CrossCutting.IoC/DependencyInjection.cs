@@ -3,7 +3,6 @@ using VendingMachine.Application.Interface;
 using VendingMachine.Application.Services;
 using VendingMachine.CrossCutting.Bus;
 using VendingMachine.Domain.Common.Interfaces;
-using VendingMachine.Domain.Interface;
 using VendingMachine.Domain.Interfaces;
 using VendingMachine.Infra.Data.Context;
 using VendingMachine.Infra.Data.EventStoring;
@@ -20,7 +19,7 @@ namespace VendingMachine.CrossCutting.IoC
         }
         public static void RegisterApplication(IServiceCollection services)
         {
-            services.AddScoped<ITransactionService, VendingService>();
+            services.AddScoped<ITransactionService, TransactionService>();
         }
         
         public static void RegisterEvents(IServiceCollection services)

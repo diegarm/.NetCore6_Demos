@@ -29,10 +29,10 @@ namespace VendingMachine.Infra.Data.Context
             var idTransaction = Guid.NewGuid();
             modelBuilder.Entity<Wallet>()
                         .HasData(
-                            new Wallet { IdTransaction = idTransaction, Coin = Coin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
-                            new Wallet { IdTransaction = idTransaction, Coin = Coin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
-                            new Wallet { IdTransaction = idTransaction, Coin = Coin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
-                            new Wallet { IdTransaction = idTransaction, Coin = Coin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 }
+                            new Wallet { IdTransaction = idTransaction, Coin = TypeCoin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
+                            new Wallet { IdTransaction = idTransaction, Coin = TypeCoin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
+                            new Wallet { IdTransaction = idTransaction, Coin = TypeCoin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 },
+                            new Wallet { IdTransaction = idTransaction, Coin = TypeCoin.Cent10, DateTransaction = DateTime.Now, Quantity = 100 }
                          );
 
 

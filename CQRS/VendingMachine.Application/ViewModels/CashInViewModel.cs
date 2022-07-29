@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using VendingMachine.Domain.Model;
 
 namespace VendingMachine.Application.ViewModels
 {
     public class CashInViewModel
     {
-        [Required(ErrorMessage = "The amount is required")]
+        [Required(ErrorMessage = "The coin is required")]
         [MinLength(1)]
-        public decimal Amount;
+        public TypeCoin Coin { get; set; }
     }
 }

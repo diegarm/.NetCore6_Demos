@@ -5,7 +5,7 @@ using VendingMachine.Application.ViewModels;
 namespace VendingMachine.Services.Api.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TransactionController : ApiController
     {
         private readonly ILogger<TransactionController> _logger;
@@ -19,13 +19,19 @@ namespace VendingMachine.Services.Api.Controllers
         [HttpPost(Name = "cash-in")]
         public async Task<IActionResult> CashIn([FromBody] CashInViewModel cashIn)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.RegisterCashIn(cashIn));
+            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.CashIn(cashIn));
         }
 
-        [HttpPost(Name = "refund")]
-        public async Task<IActionResult> Refund([FromBody] CashInViewModel cashIn)
+        [HttpPost(Name = "refund/{id:guid}")]
+        public async Task<IActionResult> Refund(Guid id)
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.Refund());
+            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.Refund(id));
+        }
+
+        [HttpPost(Name = "buy")]
+        public async Task<IActionResult> Buy([FromBody] BuyViewModel buy)
+        {
+            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.Buy(buy));
         }
 
     }

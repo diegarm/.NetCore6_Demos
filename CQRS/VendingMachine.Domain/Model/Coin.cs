@@ -8,7 +8,7 @@ using VendingMachine.Domain.Common.Interfaces;
 
 namespace VendingMachine.Domain.Model
 {
-    public enum Coin 
+    public enum TypeCoin 
     {
         Cent10 = 10,
         Cent20 = 20,
