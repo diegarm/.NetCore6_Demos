@@ -13,7 +13,8 @@ namespace VendingMachine.Domain.Commands
 {
     public class TransactionCommandHandler : CommandHandler,
         IRequestHandler<RegisterCashInCommand, ValidationResult>,
-        IRequestHandler<RegisterRefundCommand, ValidationResult>
+        IRequestHandler<RegisterRefundCommand, ValidationResult>,
+        IRequestHandler<RegisterBuyCommand, ValidationResult>
     {
         private readonly IProductRepository _productRepository;
         private readonly ISoldRepository _soldRepository;
@@ -60,6 +61,11 @@ namespace VendingMachine.Domain.Commands
             }
 
             return await Commit(_transactionRepository.UnitOfWork);
+        }
+
+        public Task<ValidationResult> Handle(RegisterBuyCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }
