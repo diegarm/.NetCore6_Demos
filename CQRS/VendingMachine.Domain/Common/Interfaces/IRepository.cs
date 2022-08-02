@@ -7,16 +7,8 @@ using System.Threading.Tasks;
 
 namespace VendingMachine.Domain.Common.Interfaces
 {
-    public interface IRepository<T>
+    public interface IRepository<T> : IDisposable where T : IAggregateRoot
     {
-        Task SaveAsync(T entity);
-        Task DeleteAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task<T> GetAsync(object id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> GetAllByCriteria(Expression<Func<T, bool>> expression);
-
-        Task<T> GetOneByCriteria(Expression<Func<T, bool>> expression);
-
+        IUnitOfWork UnitOfWork { get; }
     }
 }

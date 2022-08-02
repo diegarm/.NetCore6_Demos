@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace VendingMachine.Domain.Common.Interfaces
 {
-    public interface IAggregateRoot
-    {
-    }
+    public interface IAggregateRoot { }
 }

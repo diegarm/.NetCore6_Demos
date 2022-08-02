@@ -10,6 +10,8 @@ namespace VendingMachine.Domain.Interfaces
 {
     public interface ITransactionRepository : IRepository<Transaction>
     {
-        Task<bool> SaveTransaction(Transaction entity);
+        void AddAsync(Transaction entity);
+        Task<IEnumerable<Transaction>> GetAllAsync();
+        Task Refund();
     }
 }

@@ -1,25 +1,45 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendingMachine.Domain.Abstract;
+using VendingMachine.Domain.Common.Interfaces;
 using VendingMachine.Domain.Events;
+using VendingMachine.Domain.Interfaces;
 using VendingMachine.Domain.Model;
 using VendingMachine.Infra.Data.Configuration;
+using VendingMachine.Infra.Data.Extension;
 
 namespace VendingMachine.Infra.Data.Context
 {
-    public class VendingMachineContext : DbContext
+    public sealed class VendingMachineContext : DbContext, IUnitOfWork
     {
-        public VendingMachineContext(DbContextOptions<VendingMachineContext> options) : base(options) { }
 
-        public DbSet<Wallet> Wallet { get; set; }
-        public DbSet<Sold> Sold { get; set; }
-        public DbSet<Product> Product { get; set; }
+        private readonly IMediatorHandler _mediatorHandler;
+
+        public VendingMachineContext(DbContextOptions<VendingMachineContext> options, IMediatorHandler mediatorHandler) : base(options)
+        {
+            _mediatorHandler = mediatorHandler;
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            ChangeTracker.AutoDetectChangesEnabled = false;
+        }
+
+        public async Task<bool> Commit()
+        {
+            await _mediatorHandler.PublishDomainEvents(this).ConfigureAwait(false);
+            var success = await SaveChangesAsync() > 0;
+
+            return success;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<ValidationResult>();
+            modelBuilder.Ignore<Event>();
+
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
             //Product

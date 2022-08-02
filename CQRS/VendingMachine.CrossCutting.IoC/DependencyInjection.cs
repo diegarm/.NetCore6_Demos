@@ -43,7 +43,6 @@ namespace VendingMachine.CrossCutting.IoC
         {
             services.AddScoped<IEventStoreRepository, EventStoreRepository>();
             services.AddScoped<IEventStore, SqlEventStore>();
-            services.AddScoped<EventStoreContext>();
         }
 
     }

@@ -47,6 +47,17 @@ namespace VendingMachine.Services.Api.Controllers
 
             return CustomResponse();
         }
+
+        protected ActionResult CustomResponse(ValidationResult validationResult, object result = null)
+        {
+            foreach (var error in validationResult.Errors)
+            {
+                AddError(error.ErrorMessage);
+            }
+
+            return CustomResponse(result);
+        }
+
         protected void AddError(string erro)
         {
             _errors.Add(erro);

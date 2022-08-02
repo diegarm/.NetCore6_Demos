@@ -30,9 +30,10 @@ namespace VendingMachine.Application.Services
             return await _mediator.SendCommand(registerCashInCommand);
         }
 
-        public Task<ValidationResult> Refund(Guid id)
+        public async Task<ValidationResult> Refund()
         {
-            throw new NotImplementedException();
+            var registerRefundCommand = new RegisterRefundCommand();
+            return await _mediator.SendCommand(registerRefundCommand);
         }
         public void Dispose()
         {

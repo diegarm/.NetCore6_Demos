@@ -7,7 +7,7 @@ namespace VendingMachine.Application.Interface
     public interface ITransactionService : IDisposable
     {
         Task<ValidationResult> CashIn(CashInViewModel cashIn);
-        Task<ValidationResult> Refund(Guid id);
+        Task<ValidationResult> Refund();
         Task<ValidationResult> Buy(BuyViewModel buy);
     }
 }

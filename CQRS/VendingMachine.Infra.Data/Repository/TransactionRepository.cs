@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VendingMachine.Domain.Common.Interfaces;
 using VendingMachine.Domain.Interfaces;
 using VendingMachine.Domain.Model;
 using VendingMachine.Infra.Data.Context;
@@ -6,38 +7,45 @@ using VendingMachine.Infra.Data.Context;
 
 namespace VendingMachine.Infra.Data.Repository
 {
-    public class TransactionRepository : UnitOfWork<Transaction>, ITransactionRepository
+    public class TransactionRepository : BaseRepository<Transaction>, ITransactionRepository
     {
         public TransactionRepository(VendingMachineContext context) : base(context)
         {
         }
 
-
-        public async Task<bool> SaveTransaction(Transaction entity)
+        public void AddAsync(Transaction entity)
         {
-            var transactionActive = await GetAllAsync();
-            var transactionCoin = Query.Where(e => e.Coin == entity.Coin).FirstOrDefault();
+            var transactionActive = DbSet.ToList();
+            var entityCoin = DbSet.Where(e => e.Coin == entity.Coin).FirstOrDefault();
 
             //ID Block Transaction
-            //if (transactionActive is not null)
-            //    entity.IdTransaction = transactionActive.FirstOrDefault().IdTransaction;
-            //else
-            //    entity.IdTransaction = Guid.NewGuid();
+            if (transactionActive is not null && transactionActive.Count() > 0)
+                entity.IdTransaction = transactionActive.FirstOrDefault().IdTransaction;
+            else
+                entity.IdTransaction = Guid.NewGuid();
 
-            if(transactionCoin is not null)
+            if(entityCoin is not null)
             {
-                transactionCoin.Quantity += 1;
-                await UpdateAsync(entity);
+                entityCoin.Quantity += 1;
+                DbSet.Update(entityCoin);
             }
             else
             {
-                var a = SaveAsync(entity);
-                return true;
+                var a = DbSet.Add(entity);
             }
-            return false;
+            
 
         }
 
+        public async Task<IEnumerable<Transaction>> GetAllAsync()
+        {
+            return await DbSet.ToListAsync(); 
+        }
 
+        public async Task Refund()
+        {
+            var entities = await GetAllAsync();
+            Db.RemoveRange(entities);
+        }
     }
 }

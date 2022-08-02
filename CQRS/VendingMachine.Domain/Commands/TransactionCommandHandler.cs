@@ -12,7 +12,8 @@ using VendingMachine.Domain.Model;
 namespace VendingMachine.Domain.Commands
 {
     public class TransactionCommandHandler : CommandHandler,
-        IRequestHandler<RegisterCashInCommand, ValidationResult>
+        IRequestHandler<RegisterCashInCommand, ValidationResult>,
+        IRequestHandler<RegisterRefundCommand, ValidationResult>
     {
         private readonly IProductRepository _productRepository;
         private readonly ISoldRepository _soldRepository;
@@ -38,18 +39,27 @@ namespace VendingMachine.Domain.Commands
                 Coin = request.Coin
             };
 
-            var isOk = await _transactionRepository.SaveTransaction(transaction);
-            
+            _transactionRepository.AddAsync(transaction);
 
-            if (!isOk)
+            return await Commit(_transactionRepository.UnitOfWork);  
+        }
+
+        public async Task<ValidationResult> Handle(RegisterRefundCommand request, CancellationToken cancellationToken)
+        {
+            var validation = new ValidationResult();
+            var transaction = await _transactionRepository.GetAllAsync();
+
+            if(transaction.Count() > 0)
             {
-                ValidationFailure failure = new ValidationFailure("Fatal", "Failed to Insert Coin, redo the operation");
-                validation.Errors.Add(failure);
+                await _transactionRepository.Refund();
+            }
+            else
+            {
+                validation.Errors.Add(new ValidationFailure("Empty", "There are no coins to return"));
+                return validation;
             }
 
-
-            return validation;
-
+            return await Commit(_transactionRepository.UnitOfWork);
         }
     }
 }

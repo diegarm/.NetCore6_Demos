@@ -25,10 +25,15 @@ namespace VendingMachine.Services.Api.Controllers
         }
 
         [HttpPost]
-        [Route("refund/{id:guid}")]
-        public async Task<IActionResult> Refund(Guid id)
+        [Route("refund")]
+        public async Task<IActionResult> Refund()
         {
-            return !ModelState.IsValid ? CustomResponse(ModelState) : CustomResponse(await _transactionService.Refund(id));
+            var validation = await _transactionService.Refund();
+            var response = new RefundResponseViewModel();
+            response.Code = "OK001";
+            response.Message = "Amount returned successfully";
+            return CustomResponse(validation, response);
+            
         }
 
         [HttpPost]

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VendingMachine.Domain.Common.Interfaces;
 
 namespace VendingMachine.Domain.Common
 {
@@ -19,6 +20,18 @@ namespace VendingMachine.Domain.Common
         protected void AddError(string mensagem)
         {
             ValidationResult.Errors.Add(new ValidationFailure(string.Empty, mensagem));
+        }
+
+        protected async Task<ValidationResult> Commit(IUnitOfWork uow, string message)
+        {
+            if (!await uow.Commit()) AddError(message);
+
+            return ValidationResult;
+        }
+
+        protected async Task<ValidationResult> Commit(IUnitOfWork uow)
+        {
+            return await Commit(uow, "There was an error saving data").ConfigureAwait(false);
         }
 
     }
