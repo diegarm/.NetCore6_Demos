@@ -8,8 +8,6 @@ namespace UsingRecord
 {
     public record Carro
     {
-      
-
         public string? Marca { get; init; }
         public string? Modelo { get; init; }
         public string? Cor { get; init; }
